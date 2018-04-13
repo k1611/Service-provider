@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    {{> mheader }}
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
+    <div class="container">
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>Manger User Profile</h1>
+        {{# if login}}
+        <form action="/mman/signin" method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" value="{{user.email}}" id="email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" value="{{user.name}}" id="name" name="name" class="form-control">
+            </div>
+             <div class="form-group">
+                <label>Contact</label>
+                <input type="text" value="{{user.contact}}" id="name" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input type="text" value="{{user.add1}}" id="name" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Pin</label>
+                <input type="text" value="{{user.pin}}" id="name" name="name" class="form-control">
+            </div>
+            {{!-- <input type="hidden" name="_csrf" value="{{ csrfToken }}"> --}}
+            {{!-- <button type="submit" class="btn btn-primary">Update</button> --}}
+        </form>
+        {{/if}}
+        <hr>
+        <h2>My Orders</h2>
+        {{# each orders }}
+         <h2>{{this.user}}</h2>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul class="list-group">
+                        {{# each this.items }}
+                            <li class="list-group-item">
+                                <span class="badge">{{ this.price }}</span>
+                                {{ this.item.title }} | {{ this.qty }} Units
+                                <span class="badge">{{ this.mman }}</span>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <strong>Total Price: ${{ this.cart.totalPrice }}</strong>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
